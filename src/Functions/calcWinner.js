@@ -1,4 +1,4 @@
-export function calcWinner(boxes){
+export const calcWinner = (boxes) =>{
     const lines = [
         [0, 1, 2],
         [3, 4, 5],

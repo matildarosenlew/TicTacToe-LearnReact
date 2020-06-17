@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function Box(props) {
+export const Box = (props) => {
 
   const mystyle = {
     backgroundColor: props.boardColor,

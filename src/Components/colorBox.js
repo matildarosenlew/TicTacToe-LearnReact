@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function ColorBox(props) {
+export const ColorBox = (props) => {
 
   const mystyle = {
     backgroundColor: props.hexCode,

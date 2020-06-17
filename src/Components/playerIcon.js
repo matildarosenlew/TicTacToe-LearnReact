@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function PlayerIcon(props) {
+export const PlayerIcon = (props) => {
     return (
         <button
           className="icons"

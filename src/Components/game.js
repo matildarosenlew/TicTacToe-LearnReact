@@ -5,7 +5,7 @@ import {ColorBox} from './colorBox';
 import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
 
 
-export function Game(props) {
+export const Game = (props) => {
 
   const [emoji, setEmoji] = React.useState('');
   const [boardColor, setBoardColor] = React.useState('');
@@ -14,11 +14,8 @@ export function Game(props) {
   const [pickedIcon, setPickedIcon] = React.useState(false);
   const [clickedPlay, setPlay] = React.useState(false);
 
-  var emojiList = ['🧠', '🦾', '👵', '🦹‍♂️', '🧚‍♀️'];
-  var colorHex = [{'backCol':'#E27D60', 'border':'#E8A87C'}, {'backCol':'#E8A87C', 'border':'#E27D60'}, {'backCol':'#C38D9E', 'border':'#E8A87C'}, {'backCol':'#41B3A3','border':'#41B3C0'}, {'backCol':'#41B3C0', 'border':'#41B3A3'}];
-  colorHex.forEach(element => {
-    console.log(element[0] + '\n');
-  }); 
+  const emojiList = ['🧠', '🦾', '👵', '🦹‍♂️', '🧚‍♀️'];
+  const colorHex = [{'backCol':'#E27D60', 'border':'#E8A87C'}, {'backCol':'#E8A87C', 'border':'#E27D60'}, {'backCol':'#C38D9E', 'border':'#E8A87C'}, {'backCol':'#41B3A3','border':'#E8A87C'}, {'backCol':'#41B3C0', 'border':'#E8A87C'}];
 
 
   const renderIcon = (emoji) => {
@@ -55,8 +52,8 @@ export function Game(props) {
       if (pickedIcon && pickedColor && clickedPlay) {
         return startGame(emoji, boardColor, border);
       } 
-      let iconPrompt = 'Choose your player icon & board color!';
-      let colorPrompt = 'Choose your board color!';
+      const iconPrompt = 'Choose your player icon & board color!';
+      const colorPrompt = 'Choose your board color!';
 
 
       return (
@@ -74,6 +71,6 @@ export function Game(props) {
       );
     }
 
-  function startGame(emoji, color, border){
+  const startGame = (emoji, color, border) => {
     return  <Redirect to={{pathname: "/gameStart" , state: {playerIcon: emoji, boardColor: color, border:border} }} />
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
 
 
-export function GameOver(props){
+export const GameOver = (props) =>{
   
       return (
         <div className="wrapper">

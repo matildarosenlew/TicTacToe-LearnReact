@@ -6,12 +6,12 @@ import {Box} from './box';
 import {GameOver} from './gameOver';
 import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
 
-export function Board(props) {   
+export const Board =(props) => {   
   const [boxes, setBoxes] = React.useState(Array(9).fill(null));
   const [xIsNext, setNext] = React.useState(true);
-  var xPlayer = props.location.state.playerIcon;
-  var boardColor = props.location.state.boardColor;
-  var border = props.location.state.border;
+  const xPlayer = props.location.state.playerIcon;
+  const boardColor = props.location.state.boardColor;
+  const border = props.location.state.border;
 
     const renderBox= (i) => {
       return <Box 
@@ -80,7 +80,6 @@ export function Board(props) {
       );
     }
 
-  function winnerAnnounced(msg){
-      //console.log(winner);
+  const winnerAnnounced = (msg) => {
     return  <Redirect to={{pathname: "/gameOver" , state: {win:msg} }} />
   }
