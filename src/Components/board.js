@@ -11,10 +11,13 @@ export function Board(props) {
   const [xIsNext, setNext] = React.useState(true);
   var xPlayer = props.location.state.playerIcon;
   var boardColor = props.location.state.boardColor;
+  var border = props.location.state.border;
 
     const renderBox= (i) => {
       return <Box 
         value={boxes[i]}
+        border={border}
+        boardColor={boardColor}
         onClick={() => handleClick(i)}
         />;
     }

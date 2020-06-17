@@ -9,10 +9,17 @@ export function Game(props) {
 
   const [emoji, setEmoji] = React.useState('');
   const [boardColor, setBoardColor] = React.useState('');
+  const [border, setBorderCol] = React.useState('');
   const [pickedColor, setPickedColor] = React.useState(false);
   const [pickedIcon, setPickedIcon] = React.useState(false);
+  const [clickedPlay, setPlay] = React.useState(false);
+
   var emojiList = ['🧠', '🦾', '👵', '🦹‍♂️', '🧚‍♀️'];
-  var colorHex = ['#E27D60', '#E8A87C', 'C38D9E', '#41B3A3', '#000000'];
+  var colorHex = [{'backCol':'#E27D60', 'border':'#E8A87C'}, {'backCol':'#E8A87C', 'border':'#E27D60'}, {'backCol':'#C38D9E', 'border':'#E8A87C'}, {'backCol':'#41B3A3','border':'#41B3C0'}, {'backCol':'#41B3C0', 'border':'#41B3A3'}];
+  colorHex.forEach(element => {
+    console.log(element[0] + '\n');
+  }); 
+
 
   const renderIcon = (emoji) => {
     return <PlayerIcon
@@ -21,10 +28,11 @@ export function Game(props) {
       />;
   }
 
-  const renderColorPick = (hexCode) => {
+  const renderColorPick = (hexCode, border) => {
     return <ColorBox
       hexCode={hexCode}
-      onClick={() => handleClickCol(hexCode)}
+      border = {border}
+      onClick={() => handleClickCol(hexCode, border)}
       />;
   }
 
@@ -33,32 +41,39 @@ export function Game(props) {
       setPickedIcon(true);
   }
 
-  const handleClickCol = (hexCode) => {
+  const handleClickCol = (hexCode, border) => {
     setBoardColor(hexCode);
+    setBorderCol(border);
     setPickedColor(true);
 }
 
+  const handleClickPlay = () => {
+    setPlay(true);
+}
 
-      if (pickedIcon && pickedColor) {
-        return startGame(emoji, boardColor);
-      }
-      let prompt = 'Choose your player icon!';
+
+      if (pickedIcon && pickedColor && clickedPlay) {
+        return startGame(emoji, boardColor, border);
+      } 
+      let iconPrompt = 'Choose your player icon & board color!';
+      let colorPrompt = 'Choose your board color!';
 
 
       return (
         <div className= "wrapper">
           <h1 className="game-header">TIC-TAC-TOE</h1>    
-          <h2 className="board-heading">{prompt}</h2>
+          <h2 className="board-heading">{iconPrompt}</h2>
           <div className="icon-row">
           {emojiList.map((emoji) => renderIcon(emoji))}
           </div>
            <div className="color-row">
-          {colorHex.map((hexCode) => renderColorPick(hexCode))}
+          {colorHex.map((elem) => renderColorPick(elem.backCol, elem.border))}
           </div> 
+          <button className="play-button2"  onClick={() => handleClickPlay()}>PLAY</button>
         </div>
       );
     }
 
-  function startGame(emoji, color){
-    return  <Redirect to={{pathname: "/gameStart" , state: {playerIcon: emoji, boardColor: color} }} />
+  function startGame(emoji, color, border){
+    return  <Redirect to={{pathname: "/gameStart" , state: {playerIcon: emoji, boardColor: color, border:border} }} />
 }
